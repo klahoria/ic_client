@@ -1,23 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import 'normalize.css';
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from "./Store/Store";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./store/store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import { BrowserRouter } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
+    <PersistGate loading={null} persistor={store().persistor}>
+      <Provider store={store().store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
-    </BrowserRouter>
+    </PersistGate>
   </React.StrictMode>
 );
 

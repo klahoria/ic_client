@@ -1,28 +1,38 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { loginaction } from "../../Store/Actions/Actions";
+import { login_action } from "../../store/Actions/Auth/Auth";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.state = {
+      userInfo: { email: "", password: "" },
+    };
   }
 
-  handleLogin() {}
+  componentDidMount() {
+    if (this.props.userInfo_state.email && this.props.userInfo_state.password) {
+      this.setState(
+        (prev) => (prev["userInfo"] = {...this.props.userInfo_state}),
+      );
+    }
+  }
+
+  handleLogin(data) {
+    this.props.login(data);
+  }
 
   render() {
-    const { token } = this.props;
     return (
       <div className="row justify-content-center align-items-center h-100">
-        <div className="col-4 pb-5 border rounded-4 shadow">
+        <div className="col-md-4 col-12 pb-5 border rounded-4 shadow">
           <h2 className="py-3 text-center px-3">Login</h2>
 
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={this.state.userInfo}
+            enableReinitialize={true}
             validationSchema={Yup.object({
               email: Yup.string()
                 .email("Please enter a valid email address")
@@ -36,7 +46,7 @@ class Login extends Component {
               this.props.login(value);
             }}
           >
-            {({ value, isSubmitting }) => (
+            {({ value, isSubmitting, errors, touched, dirty }) => (
               <Form className=" h-100 p-4">
                 <div className="col-auto mb-3">
                   <label htmlFor="staticEmail2" className="visually-hidden">
@@ -78,9 +88,7 @@ class Login extends Component {
                 </div>
 
                 <div className="col-auto text-center">
-                  <span>
-                    <Link to="/register">Register</Link>
-                  </span>
+                  <span>{/* <Link to="/register">Register</Link> */}</span>
 
                   {/* <div className="row justify-content-center"> */}
                   {/* </div> */}
@@ -94,12 +102,18 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => (console.log(state), {
-  token:''
-});
+const mapStateToProps = (state) => (
+  {
+    token: "",
+    userInfo_state: {
+      email: state.auth.userInfo.email || "",
+      password: state.auth.userInfo?.password || "",
+    },
+  }
+);
 
 const mapDispatchToProps = {
-  login: (data) => loginaction(data),
+  login: (data) => login_action(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
