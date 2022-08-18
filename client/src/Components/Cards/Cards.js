@@ -10,15 +10,9 @@ import "./Cards.css";
 export default class Cards extends Component {
   render() {
     return (
-      <div class="card border-0 rounded-5">
-        <div
-          class={
-            this.props.is_large == true
-              ? "d-flex align-items-center p-4"
-              : "card-body"
-          }
-        >
-          <h5 class="card-title d-flex">
+      <div className="card border-0 rounded-5">
+        <div className="card-body">
+          <h5 className="card-title d-flex">
             <span
               className="bg-dark text-white d-inline-block rounded-pill d-flex align-items-center justify-content-center"
               style={{ width: "40px", height: "40px" }}
@@ -30,7 +24,7 @@ export default class Cards extends Component {
               <p className="fs-7 text-muted">Bitcoin</p>
             </span>
           </h5>
-          <p class="card-text">
+          <p className="card-text">
             <LineGraph></LineGraph>
           </p>
           <span className="text-dark fw-bold" style={{ color: "#7cdba7" }}>
@@ -56,7 +50,7 @@ export class HistoryCards extends Component {
           <span>{this.props.date}</span>
         </div>
         {this.props.details_arr.map((item) => (
-          <div className="py-3 d-flex align-items-top justify-content-start">
+          <div className="py-3 d-flex align-items-top justify-content-start flex-wrap">
             <div className="px-3">
               {item.type == "Supplies" ? (
                 <BsArrowLeftRight />
@@ -132,6 +126,42 @@ export class HistoryCards extends Component {
             </div>
           </div>
         ))}
+      </div>
+    );
+  }
+}
+
+export class RealtimeCards extends Component {
+  render() {
+    return (
+      <div className="card border-0 rounded-0 bg-transparent flex-wrap">
+        <div className="card-body d-flex align-items-center flex-wrap">
+          <h5 className="card-title d-flex align-items-center flex-grow-1">
+            <span
+              className="bg-dark text-white d-inline-block rounded-pill d-flex align-items-center justify-content-center"
+              style={{ width: "40px", height: "40px" }}
+            >
+              {this.props.icon || <FaBtc />}
+            </span>
+            <span className="title_card fs-6 px-3">
+              <p className="mb-1">{this.props.fullName || "Bitcoin"}</p>
+              <p className="fs-7 mb-0 text-muted">
+                {this.props.short_name || "BTC"}
+              </p>
+            </span>
+          </h5>
+          <p className="card-text " style={{ maxWidth: "30%" }}>
+            <LineGraph></LineGraph>
+          </p>
+          <div className="flex-grow-1 ms-3">
+            <span className="text-dark fw-bold" style={{ color: "#7cdba7" }}>
+              {this.props.amount || "$1234"}
+            </span>
+            <span className="float-end" style={{ color: "#7cdba7" }}>
+              {this.props.financeStatus || "+0.25%"}
+            </span>
+          </div>
+        </div>
       </div>
     );
   }

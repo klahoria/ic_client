@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import "./Header.css";
 import { FiSearch } from "react-icons/fi";
 import styled from "styled-components";
+import { connect } from "react-redux";
+
 // FiSearch
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +29,10 @@ export default class Header extends Component {
                     width="60px"
                     height={"60px"}
                     className="rounded-5 border"
-                    src="http://localhost:4000/users/images/getMyImage/1657344628884-166045541.jpg"
+                    src={
+                      this.props?.state?.auth?.userInfo?.userProfileInfo
+                        .profile_image || ""
+                    }
                     alt=""
                   />
                 </a>
@@ -82,16 +87,12 @@ export default class Header extends Component {
               >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-end">
                   <li className="nav-item mx-2">
-                    <Button
-                      className="nav-link rounded-5 bg-white border"
-                    >
+                    <Button className="nav-link rounded-5 bg-white border">
                       <FiSearch />
                     </Button>
                   </li>
                   <li className="nav-item mx-2">
-                    <Button
-                      className="nav-link rounded-5 bg-white border"
-                    >
+                    <Button className="nav-link rounded-5 bg-white border">
                       <FiSearch />
                     </Button>
                   </li>
@@ -104,6 +105,12 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({ state });
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 export const Button = styled.button`
   width: 40px !important;

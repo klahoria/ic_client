@@ -104,9 +104,19 @@ export default class SummaryPage extends Component {
           <div className="mt-5 row">
             <div className="col-12 px-4">
               <div className="d-flex">
-                <div className="border-bottom bc pb-3 flex-grow-1">
-                  <span className="h6 pe-3 ">History</span>
-                  <span className="h6 px-3 ">Upcomming</span>
+                <div className="border-bottom bc flex-grow-1">
+                  <span
+                    role={"button"}
+                    className="h6 px-3 pb-3 mb-0 text-center active d-inline-block"
+                  >
+                    History
+                  </span>
+                  <span
+                    role={"button"}
+                    className="h6 px-3 pb-3 mb-0 text-center d-inline-block"
+                  >
+                    Upcomming
+                  </span>
                 </div>
                 <div className="d-flex">
                   <div className="">

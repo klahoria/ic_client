@@ -42,8 +42,7 @@ export class Profile extends Component {
         (prev.userData = {
           ...this.props.userInfo,
           password: "**********",
-          profileImage:
-            "https://cdn.dribbble.com/userupload/2813428/file/original-911fba61780e6f88c66a7a61cd17f66d.jpg?compress=1&resize=1200x900",
+          profile_image: this.props.userInfo.profile_image || "",
         })
     );
   }
@@ -71,7 +70,7 @@ export class Profile extends Component {
     let data = new FormData();
 
     data.append("profile_image", e);
-    data.append('email',this.state.email)
+    data.append("email", this.state.email);
 
     axios.put("http://localhost:4000/users/upload_profile_image", data);
   }
@@ -106,9 +105,9 @@ export class Profile extends Component {
                   <label htmlFor="profileImge">
                     <img
                       src={
-                        typeof values?.profileImage == "object"
-                          ? URL.createObjectURL(values.profileImage)
-                          : values?.profileImage
+                        typeof values?.profile_image == "object"
+                          ? URL.createObjectURL(values.profile_image)
+                          : values?.profile_image
                       }
                       width="200px"
                       height="200px"
@@ -121,11 +120,11 @@ export class Profile extends Component {
                       className="visually-hidden"
                       id="profileImge"
                       accept="image/*"
-                      name="profileImage"
+                      name="profile_image"
                       onChange={(e) =>
                         e.target.files[0] &&
                         setFieldValue(
-                          "profileImage",
+                          "profile_image",
                           e.target.files[0],
                           this.uploadImage(e.target.files[0])
                         )

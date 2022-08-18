@@ -12,7 +12,9 @@ import { TiChartBar } from "react-icons/ti";
 import { CgShoppingBag } from "react-icons/cg";
 import SummaryPage from "../SummaryPage/SummaryPage";
 import { FiDownload, FiUpload } from "react-icons/fi";
-import Cards from "../Cards/Cards";
+import { SiBinance, SiLitecoin } from "react-icons/si";
+import { FaBitcoin, FaEthereum } from "react-icons/fa";
+import Cards, { RealtimeCards } from "../Cards/Cards";
 
 export class Landing extends Component {
   constructor(props) {
@@ -84,7 +86,7 @@ export class Landing extends Component {
             className="w-100 rounded-4 p-3 form-floating"
             style={{
               background: "url(img/png/card_bg.png)",
-              backgroundSize: "100% 100%",
+              backgroundSize: "100% 170%",
               boxShadow: "0px 15px 70px -55px black",
             }}
           >
@@ -101,7 +103,7 @@ export class Landing extends Component {
             {/* buttons card */}
             <div className="button_colm text-center">
               <button
-                className="btn btn-light px-4"
+                className="btn btn-light px-lg-4 rounded-pill rounded-lg-0"
                 style={{ marginBottom: "-40px" }}
               >
                 <span className="pe-2 fw-bold">
@@ -110,7 +112,7 @@ export class Landing extends Component {
                 <span className="fw-bold">Deposite</span>
               </button>
               <button
-                className="btn btn-light px-4 ms-3"
+                className="btn btn-light px-lg-4 rounded-pill rounded-lg-0 ms-3"
                 style={{ marginBottom: "-40px" }}
               >
                 <span className="pe-2 fw-bold">
@@ -136,8 +138,27 @@ export class Landing extends Component {
                 <Cards />
               </div>
 
-              <div className="col-12">
-                <Cards is_large={true} />
+              <div className="col-12 mt-4">
+                <RealtimeCards
+                  short_name="BNB"
+                  fullName="Binance"
+                  icon={<SiBinance />}
+                />
+                <RealtimeCards
+                  short_name="LTC"
+                  fullName="Litecoin"
+                  icon={<SiLitecoin />}
+                />
+                <RealtimeCards
+                  short_name="ETH"
+                  fullName="Ethereum"
+                  icon={<FaEthereum />}
+                />
+                <RealtimeCards
+                  short_name="BTC"
+                  fullName="Bitcoin"
+                  icon={<FaBitcoin />}
+                />
               </div>
             </div>
           </div>

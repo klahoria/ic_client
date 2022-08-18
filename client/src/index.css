@@ -32,3 +32,9 @@ code {
 .c_blue {
   color: #4621d9;
 }
+
+.active {
+  margin-bottom: 0px !important ;
+  border-bottom: 4px solid #4621d9;
+  color: #4621d9;
+}

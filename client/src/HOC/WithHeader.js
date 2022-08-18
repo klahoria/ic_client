@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Components/Header/Header";
 import "./WithHeader.css";
+import store from "../store/store";
 
 function WithHeader(WrappedComponent, selectData) {
   return class extends React.Component {
@@ -44,4 +45,5 @@ function WithHeader(WrappedComponent, selectData) {
     }
   };
 }
+
 export default WithHeader;
